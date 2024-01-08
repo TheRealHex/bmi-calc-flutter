@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/widgets/input.dart';
+import 'package:bmi_calculator/widgets/label.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -12,21 +13,45 @@ class Home extends StatelessWidget {
         title: const Text('BMI Calculator'),
         centerTitle: true,
         titleTextStyle: const TextStyle(
+          color: Colors.white70,
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
       ),
-      body: SizedBox(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
+        decoration: const BoxDecoration(color: Colors.black),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextInputField(hint: 'ft'),
-            const TextInputField(hint: 'kg'),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Test'),
+            const Row(
+              children: [
+                Spacer(),
+                Label(text: 'Height'),
+                TextInputField(hint: 'ft'),
+                Spacer(),
+              ],
+            ),
+            const Row(
+              children: [
+                Spacer(),
+                Label(text: 'Weight'),
+                TextInputField(hint: 'kg'),
+                Spacer(),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.blue,
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {},
+                child: const Text('Calculate'),
+              ),
             ),
           ],
         ),

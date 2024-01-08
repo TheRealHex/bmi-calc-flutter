@@ -10,10 +10,19 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 30,
+      width: 40,
       child: TextField(
         maxLength: 3,
-        decoration: InputDecoration(hintText: hint, counterText: ''),
+        style: const TextStyle(fontSize: 14, color: Colors.grey),
+        decoration: InputDecoration(
+          hintText: hint,
+          focusColor: Colors.blue,
+          border: InputBorder.none,
+          hintStyle: const TextStyle(color: Colors.grey),
+          counterText: '',
+        ),
+        cursorColor: Colors.blue,
+        textAlign: TextAlign.right,
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
