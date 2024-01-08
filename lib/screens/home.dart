@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/screens/result.dart';
 import 'package:bmi_calculator/widgets/input.dart';
 import 'package:bmi_calculator/widgets/label.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
         title: const Text('BMI Calculator'),
         centerTitle: true,
         titleTextStyle: const TextStyle(
@@ -30,6 +32,7 @@ class Home extends StatelessWidget {
                 Spacer(),
                 Label(text: 'Height'),
                 TextInputField(hint: 'ft'),
+                TextInputField(hint: 'inch'),
                 Spacer(),
               ],
             ),
@@ -49,7 +52,12 @@ class Home extends StatelessWidget {
                   backgroundColor: Colors.blue,
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const Result()),
+                  );
+                },
                 child: const Text('Calculate'),
               ),
             ),
