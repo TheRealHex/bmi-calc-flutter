@@ -36,8 +36,8 @@ class _HomeState extends State<Home> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textField(heightController, 'Height (ft)', '6.1'),
-                  textField(weightController, 'Weight (kg)', '70'),
+                  textField(heightController, 'Height (ft)', '6.1 inch'),
+                  textField(weightController, 'Weight (kg)', '70 kg'),
                   // textField(weightController, 'Age (years)', '23'),
                   const SizedBox(height: 10),
                   ElevatedButton(
