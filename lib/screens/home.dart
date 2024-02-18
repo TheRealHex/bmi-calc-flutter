@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+String result = '';
+
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     TextEditingController heightController = TextEditingController();
     TextEditingController weightController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -23,20 +31,58 @@ class Home extends StatelessWidget {
         decoration: const BoxDecoration(color: Colors.black),
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            textField(heightController, 'Height (ft)', '6.1'),
-            textField(weightController, 'Weight (kg)', '70'),
-            const SizedBox(height: 10),
-            ElevatedButton(onPressed: () {}, child: const Text('Calculate'))
-          ],
-        ),
+        child: result.isEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  textField(heightController, 'Height (ft)', '6.1'),
+                  textField(weightController, 'Weight (kg)', '70'),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(200, 80)),
+                    onPressed: () {
+                      calculate();
+                    },
+                    child: const Text('Calculate'),
+                  ),
+                  const SizedBox(height: 10),
+                  IconButton(
+                    onPressed: () {
+                      heightController.clear();
+                      weightController.clear();
+                      result = '';
+                    },
+                    icon: const Icon(Icons.repeat),
+                  ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(result),
+                  const SizedBox(height: 20),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          result = '';
+                        });
+                      },
+                      icon: const Icon(Icons.refresh))
+                ],
+              ),
       ),
     );
   }
 
-  textField(TextEditingController controller, String label, String hint) {
+  void calculate() {
+    setState(() {
+      result = 'Something.';
+    });
+  }
+
+  SizedBox textField(
+      TextEditingController controller, String label, String hint) {
     return SizedBox(
       width: 200,
       child: Padding(
