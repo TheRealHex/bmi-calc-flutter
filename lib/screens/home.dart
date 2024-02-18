@@ -108,19 +108,20 @@ class _HomeState extends State<Home> {
         (double.parse(inch) * 0.0254);
     double weightInKg = double.parse(weightController.text);
     double bmi = (weightInKg / pow(heightInMeters, 2));
+    String bmiString = bmi.toStringAsFixed(1);
 
     switch (bmi) {
       case < 18.5:
-        result = '🍽️  Gain some weight mate!';
+        result = '($bmiString) Eat more! 🍽️';
         break;
       case >= 18.5 && <= 25:
-        result = "💪 Great! You're good.";
+        result = "($bmiString) Great job! 🪅";
         break;
       case > 25 && <= 30:
-        result = '🏃 Almost there, keep it up!';
+        result = '($bmiString) Almost there! 🏃';
         break;
       default:
-        result = '🥦 Start losing the weight!';
+        result = '($bmiString) Lose the weight! 🥦';
     }
     setState(() {});
   }
