@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(200, 80)),
                     onPressed: () {
-                      calculate();
+                      calculateBmi();
                     },
                     child: const Text('Calculate'),
                   ),
@@ -86,26 +86,42 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void calculate() {
+  void calculateBmi() {
+    if (heightController.text.isEmpty || weightController.text.isEmpty) return;
+
+    // remove strings from input if user types
     heightController.text =
         heightController.text.replaceAll(RegExp(r'[^0-9.]'), '');
     weightController.text =
         weightController.text.replaceAll(RegExp(r'[^0-9.]'), '');
-    //ft to meter conversion x 0.3048
-    // inch to ft & to meter x 0.0254
+
+    // get value of inch to change into meters
     String inch = '0';
     if (heightController.text.contains('.')) {
       List<String> parts = heightController.text.split('.');
       if (parts.length == 2) {
         inch = parts[1];
-        debugPrint(inch);
       }
     }
+
     double heightInMeters = double.parse(heightController.text) * 0.3048 +
         (double.parse(inch) * 0.0254);
     double weightInKg = double.parse(weightController.text);
     double bmi = (weightInKg / pow(heightInMeters, 2));
-    result = bmi.toStringAsFixed(1);
+
+    switch (bmi) {
+      case < 18.5:
+        result = '🍽️  Gain some weight mate!';
+        break;
+      case >= 18.5 && <= 25:
+        result = "💪 Great! You're good.";
+        break;
+      case > 25 && <= 30:
+        result = '🏃 Almost there, keep it up!';
+        break;
+      default:
+        result = '🥦 Start losing the weight!';
+    }
     setState(() {});
   }
 
